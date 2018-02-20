@@ -1,0 +1,167 @@
+/***
+  reset
+***/
+/*body{font-size:16px;font-weight:300;font-family:'Open Sans',sans-serif}h1,h2,h3,h4,h5{font-family:'Open Sans',sans-serif;font-weight:300;margin-top:20px;margin-bottom:20px}h1 small,h2 small,h3 small,h4 small,h5 small,h6 small,.h1 small,.h2 small,.h3 small,.h4 small,.h5 small,.h6 small,h1 .small,h2 .small,h3 .small,h4 .small,h5 .small,h6 .small,.h1 .small,.h2 .small,.h3 .small,.h4 .small,.h5 .small,.h6 .small{color:inherit}div.header-container.container-fluid,div.body-container.container-fluid,div.footer-container.container-fluid{padding-left:0;padding-right:0}a:hover,a:focus{color:#1678c4;text-decoration:none}.ansi-logo img{box-sizing:initial}h1{margin-bottom:20px}p{margin:1em 0}blockquote{border:0}input[type="file"]:focus,input[type="radio"]:focus,input[type="checkbox"]:focus{outline:0}label{font-weight:300}.page-header{margin:0;border-bottom:0}.panel{border-radius:0;border:0}.panel-group .panel+.panel{margin-top:0}.panel-group .panel{border-radius:0}*/
+
+
+body {
+  padding-top: 70px;
+}
+
+.lowercase {
+  text-transform: lowercase;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.btn {
+  text-transform: uppercase;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.panel-noborder {
+  border: 0px solid transparent;
+  box-shadow: 0 0px 0px rgba(0,0,0,.05);
+}
+
+.container .login, .container-fluid .login {
+  padding-right: 60px;
+  padding-left: 60px;
+  border-radius: 6px;
+  padding-top: 48px;
+  padding-bottom: 48px;
+  margin-bottom: 30px;
+  color: inherit;
+  background-color: #eee;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+  padding-top: 48px;  
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin #username {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin #password {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+#invoice-POS {
+  box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
+  padding: 2mm;
+  margin: 0 auto;
+  width: 80mm;
+  background: #FFF;
+}
+#invoice-POS ::selection {
+  background: #f31544;
+  color: #FFF;
+}
+#invoice-POS ::moz-selection {
+  background: #f31544;
+  color: #FFF;
+}
+#invoice-POS h1 {
+  font-size: 1.5em;
+  color: #222;
+}
+#invoice-POS h2 {
+  font-size: .9em;
+}
+#invoice-POS h3 {
+  font-size: 1.2em;
+  font-weight: 300;
+  line-height: 2em;
+}
+#invoice-POS p {
+  font-size: .7em;
+  color: #666;
+  line-height: 1.2em;
+}
+#invoice-POS #top, #invoice-POS #mid, #invoice-POS #bot {
+  /* Targets all id with 'col-' */
+  border-bottom: 1px solid #EEE;
+}
+#invoice-POS #top {
+  min-height: 100px;
+}
+#invoice-POS #mid {
+  min-height: 80px;
+}
+#invoice-POS #bot {
+  min-height: 50px;
+}
+#invoice-POS #top .logo {
+  height: 60px;
+  width: 60px;
+  background: url(http://michaeltruong.ca/images/logo1.png) no-repeat;
+  background-size: 60px 60px;
+}
+#invoice-POS .clientlogo {
+  float: left;
+  height: 60px;
+  width: 60px;
+  background: url(http://michaeltruong.ca/images/client.jpg) no-repeat;
+  background-size: 60px 60px;
+  border-radius: 50px;
+}
+#invoice-POS .info {
+  display: block;
+  margin-left: 0;
+}
+#invoice-POS .title {
+  float: right;
+}
+#invoice-POS .title p {
+  text-align: right;
+}
+#invoice-POS table {
+  width: 100%;
+  border-collapse: collapse;
+}
+#invoice-POS .tabletitle {
+  font-size: .5em;
+  background: #EEE;
+}
+#invoice-POS .service {
+  border-bottom: 1px solid #EEE;
+}
+#invoice-POS .item {
+  width: 24mm;
+}
+#invoice-POS .itemtext {
+  font-size: .5em;
+}
+#invoice-POS #legalcopy {
+  margin-top: 5mm;
+}

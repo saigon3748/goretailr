@@ -1,0 +1,37 @@
+<div class="modal-header">
+  <h4 class="modal-title">Create menu</h4>
+</div>
+<div class="modal-body">
+  <form class="form-horizontal" role="form" novalidate>
+    <div class="form-group">
+      <label class="control-label col-sm-3">Name</label>
+      <div class="col-sm-9">
+        <input class="form-control" ng-model="$ctrl.menu.name" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-3">Unit Price</label>
+      <div class="col-sm-9">
+        <input type="number" class="form-control" ng-model="$ctrl.menu.unit_price" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-3">Tags</label>
+      <div class="col-sm-9">
+        <input class="form-control" ng-model="$ctrl.menu._tags" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-3">Status</label>
+      <div class="col-sm-9">
+        <div class="checkbox">
+          <label><input type="checkbox" ng-model="$ctrl.menu.isLocked"/>Locked</label>
+        </div>        
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" ng-click="$ctrl.cancel()" class="btn btn-default" data-dismiss="modal">Cancel</button>
+  <button type="button" ng-click="$ctrl.save()" class="btn btn-primary" data-dismiss="modal">Save</button>
+</div>

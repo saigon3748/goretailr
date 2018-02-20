@@ -1,0 +1,2 @@
+web: pm2 start dist/server/apps/web
+worker: pm2 start dist/server/apps/worker
