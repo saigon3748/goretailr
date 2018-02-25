@@ -60,9 +60,10 @@ export default [
         })      
     }
 
-    getTags(menu) {
-      if (!menu.tags) return null;
-      return menu.tags.reduce((value, item) => `${value}, ${item}`);
+    getDiscount(menu) {
+      if (!menu.discount) return null;
+      if (menu.isPercentDiscount) return `${menu.discount}%`;
+      return "$" + `${menu.discount}`;
     }
 
     getStatus(menu) {

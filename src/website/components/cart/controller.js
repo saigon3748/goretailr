@@ -22,7 +22,7 @@ export default [
         discount: 0,
         tax: 0,
         total: 0,
-        line_items: []
+        items: []
       }
 
       this.selectedTag = 'All';
@@ -48,7 +48,7 @@ export default [
     }
 
     selectMenu(menu) {
-      let item = _.find(this.order.line_items, item => {
+      let item = _.find(this.order.items, item => {
         return item.name === menu.name;
       })
 
@@ -57,14 +57,14 @@ export default [
       } else {
         item = _.clone(menu);
         item.quantity = 1;
-        this.order.line_items.push(item);
+        this.order.items.push(item);
       }
 
       this.calculate();
     }
 
     isSelectedMenu(menu) {
-      return _.some(this.order.line_items, item => {
+      return _.some(this.order.items, item => {
         return item.name === menu.name;
       })
     }
@@ -83,7 +83,7 @@ export default [
       item.quantity--;
 
       if (item.quantity === 0) {
-        this.order.line_items = _.filter(this.order.line_items, menu => {
+        this.order.items = _.filter(this.order.items, menu => {
           return menu._id != item._id; 
         });
       }
@@ -96,8 +96,8 @@ export default [
       let discount = 0;
       let total = 0;
 
-      this.order.line_items.forEach(item => {
-        item.subtotal = item.quantity * item.unit_price;
+      this.order.items.forEach(item => {
+        item.subtotal = item.quantity * item.unitPrice;
         item.discount = 0;
         item.total = item.subtotal - item.discount;
 
@@ -121,7 +121,7 @@ export default [
             discount: 0,
             tax: 0,
             total: 0,
-            line_items: []
+            items: []
           }
 
           this.selectedTag = 'All';
@@ -129,7 +129,7 @@ export default [
     }
 
     confirm() {
-      if (this.order.line_items.length === 0) {
+      if (this.order.items.length === 0) {
         return toastr.error('Select items to confirm');
       }
 
@@ -148,7 +148,7 @@ export default [
                 discount: 0,
                 tax: 0,
                 total: 0,
-                line_items: []
+                items: []
               }
 
               this.selectedTag = 'All';

@@ -7,10 +7,6 @@ export default express.Router()
     middleware.authenticate, 
     middleware.intercept(controller, 'find'))
 
-  .get('/tags', 
-    middleware.authenticate, 
-    middleware.intercept(controller, 'findTags'))
-
   .post('/', 
     middleware.authenticate, 
     middleware.intercept(controller, 'create'))

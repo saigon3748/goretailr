@@ -1,18 +1,26 @@
 import BaseController from '../base-controller';
 
 export default [
-  '$rootScope', '$scope', '$http', 'appConfig', '$uibModalInstance', 'MenuApi', 'menu',
+  '$rootScope', '$scope', '$http', 'appConfig', '$uibModalInstance', 'MenuApi', 'CategoryApi', 'menu',
   class Controller extends BaseController {
-    constructor($rootScope, $scope, $http, appConfig, $uibModalInstance, MenuApi, menu) {
+    constructor($rootScope, $scope, $http, appConfig, $uibModalInstance, MenuApi, CategoryApi, menu) {
       super()
       this.$http = $http;
       this.$scope = $scope;
       this.$uibModalInstance = $uibModalInstance;
       this.MenuApi = MenuApi;
+      this.CategoryApi = CategoryApi;
       this.menu = menu || {};
-      if(this.menu.tags) {
-        this.menu._tags = this.menu.tags.reduce((value, item) => `${value}, ${item}`);
-      }
+      this.categories = [];
+
+      this.init();
+    }
+
+    init() {
+      return this.CategoryApi.find()
+        .then(result => {
+          this.categories = result;
+        })
     }
 
     cancel() {
@@ -21,11 +29,6 @@ export default [
 
     save() {
       if (!this.validate()) return;
-
-      this.menu.tags = [];
-      if (this.menu._tags) {
-        this.menu.tags = this.menu._tags.split(',').map(tag => tag.trim())
-      }
 
       if (this.menu._id) {
         return this.MenuApi.update(this.menu._id, this.menu)
@@ -54,7 +57,7 @@ export default [
         return false;
       }
 
-      if (!this.menu.unit_price) {
+      if (!this.menu.unitPrice) {
         toastr.error("Unit price is required");
         return false;
       } 

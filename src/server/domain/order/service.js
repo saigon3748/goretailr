@@ -11,8 +11,8 @@ export default class Service extends BaseService {
 
   create(data) {
     if (!data) throw new Error('Missing data');
-    if (!data.line_items) throw new Error('Missing items');
-    if (data.line_items.length === 0) throw new Error('Missing items');
+    if (!data.items) throw new Error('Missing items');
+    if (data.items.length === 0) throw new Error('Missing items');
 
     let doCreate = () => {
       let doGenerateCode = () => {
@@ -24,8 +24,8 @@ export default class Service extends BaseService {
         let discount = 0;
         let total = 0;
 
-        data.line_items.forEach(item => {
-          item.subtotal = item.quantity * item.unit_price;
+        data.items.forEach(item => {
+          item.subtotal = item.quantity * item.unitPrice;
           item.discount = 0;
           item.total = item.subtotal - item.discount;
 

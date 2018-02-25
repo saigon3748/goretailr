@@ -65,14 +65,14 @@
         </tr> 
       </thead> 
       <tbody> 
-        <tr ng-repeat="item in $ctrl.order.line_items"> 
+        <tr ng-repeat="item in $ctrl.order.items"> 
           <td>{{item.name}}</td> 
           <td>{{item.quantity}}
             <a href="javascript:;" ng-click="$ctrl.increaseQuantity(item)" class="btn btn-default btn-xs pull-right" role="button">
               <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             </a>
           </td> 
-          <td>{{item.unit_price | currency}}</td>
+          <td>{{item.unitPrice | currency}}</td>
           <td>{{item.subtotal | currency}}</td>
           <td>
             <input ng-model="item.note" type="text" class="form-control" placeholder="Note...">

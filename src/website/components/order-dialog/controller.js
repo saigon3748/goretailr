@@ -46,7 +46,7 @@ export default [
         return false;
       }
 
-      if (!this.order.unit_price) {
+      if (!this.order.unitPrice) {
         toastr.error("Unit price is required");
         return false;
       } 

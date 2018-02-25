@@ -8,8 +8,4 @@ export default class Controller extends BaseController {
   constructor(ctx) {
     super(ctx, Domain.MenuService);
   }
-
-  findTags() {
-    return this._service.findTags();
-  }
 }

@@ -56,7 +56,7 @@ export default class BaseService {
 
   create(data) {
     if (!data) throw new Error('Missing data');
-
+console.log('data', data)
     data = this._appendTenant(data);
 
     _.extend(data, {
