@@ -8,7 +8,8 @@ export default {
     CART: 'Cart',
     TODAY: 'Today',
     ORDER_DETAIL: 'OrderDetail',
-    MENU_LIST: 'MenuList'
+    MENU_LIST: 'MenuList',
+    CATEGORY_LIST: 'CategoryList'
   },
   actions: {
     VIEW: 'View',

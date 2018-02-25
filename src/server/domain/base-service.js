@@ -106,6 +106,20 @@ export default class BaseService {
     let query = { _id: id };
     query = this._filterTenant(query);
 
+    return new Promise((resolve, reject) => {
+      this._repo.remove(query, (err) => {
+        if (err) throw Boom.badImplementation(err.message, err);
+        resolve();
+      });
+    });
+  }
+
+  markDeleted(id) {
+    if (!id) throw new Error('Missing id');
+
+    let query = { _id: id };
+    query = this._filterTenant(query);
+
     let data = {
       isDeleted: true,
       deletedAt: new Date(),
@@ -118,20 +132,6 @@ export default class BaseService {
 
     return new Promise((resolve, reject) => {
       this._repo.update(query, data, (err) => {
-        if (err) throw Boom.badImplementation(err.message, err);
-        resolve();
-      });
-    });
-  }
-
-  forceToDeleteById(id) {
-    if (!id) throw new Error('Missing id');
-
-    let query = { _id: id };
-    query = this._filterTenant(query);
-
-    return new Promise((resolve, reject) => {
-      this._repo.remove(query, (err) => {
         if (err) throw Boom.badImplementation(err.message, err);
         resolve();
       });

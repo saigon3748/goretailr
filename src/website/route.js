@@ -32,4 +32,8 @@ export default ['$stateProvider', '$locationProvider', 'appConfig', function ($s
       url: '/menu',
       template: '<go-menu-list/>'
     })
+    .state(appConfig.states.CATEGORY_LIST, {
+      url: '/category',
+      template: '<go-category-list/>'
+    })
 }]

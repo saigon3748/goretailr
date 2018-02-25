@@ -2,6 +2,7 @@ import _ from 'lodash';
 import Tenant from './tenant';
 import User from './user';
 import Menu from './menu';
+import Category from './category';
 import Order from './order';
 
 export default class Domain {
@@ -27,6 +28,14 @@ export default class Domain {
 
   static MenuService(ctx) {
     return new Menu.Service(ctx);
+  }
+
+  static Category(data) {
+    return new Category.Model(data);
+  }
+
+  static CategoryService(ctx) {
+    return new Category.Service(ctx);
   }
 
   static Order(data) {

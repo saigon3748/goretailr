@@ -12,7 +12,7 @@ module.exports = function(env) {
     target: 'web',
     name: 'web',
     entry: {
-      retailr: [
+      goretailr: [
         './src/website/index.js'
       ],
       vendor: [

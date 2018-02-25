@@ -4,6 +4,7 @@ import AuthApi from './auth';
 import TenantApi from './tenant';
 import UserApi from './user';
 import MenuApi from './menu';
+import CategoryApi from './category';
 import OrderApi from './order';
 
 export default express.Router()
@@ -11,5 +12,6 @@ export default express.Router()
   .use('/tenants', TenantApi)  
   .use('/users', UserApi)
   .use('/menus', MenuApi)
+  .use('/categories', CategoryApi)
   .use('/orders', OrderApi)
 
