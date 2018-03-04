@@ -19,6 +19,14 @@ export default express.Router()
     middleware.authenticate, 
     middleware.intercept(controller, 'updateById'))
 
+  .post('/updateById/:id', 
+    middleware.authenticate, 
+    middleware.intercept(controller, 'updateById'))
+
   .delete('/:id', 
+    middleware.authenticate, 
+    middleware.intercept(controller, 'deleteById'))
+
+  .post('/deleteById/:id', 
     middleware.authenticate, 
     middleware.intercept(controller, 'deleteById'))

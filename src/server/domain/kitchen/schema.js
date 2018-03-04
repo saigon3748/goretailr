@@ -12,20 +12,23 @@ let schema = mongoose.Schema({
       name: { type: String, required: true }
     }, { _id: false })
   },
+  orderId: { type: mongoose.Schema.Types.ObjectId, ref: 'orders', required: true },
+  orderCode: { type: String, required: true },
+  orderRef: { type: String, required: true },
+  itemId: { type: mongoose.Schema.Types.ObjectId, ref: 'menus' },
   name: { type: String, required: true },
-  unitPrice: { type: Number, required: true },
-  discount: { type: Number, required: true },
-  isPercentDiscount: { type: Boolean, required: true, default: false },
+  quantity: { type: Number, required: true, default: 0 },
   category: mongoose.Schema({
     _id: { type: mongoose.Schema.Types.ObjectId, ref: 'categories' },
     name: { type: String, required: true }
   }, { _id: false }),
-  isLocked: { type: Boolean, required: true, default: false }  
+  note: { type: String },
+  isCompleted: { type: Boolean, required: true, default: false }
 })
 
-schema.index({"name": "text", "category.name": "text"})
+schema.index({"orderCode": "text", "orderRef": "text", "name": "text", "note": "text", "category.name": "text"})
 
 schema.plugin(audit);
 schema.plugin(paginate);
 
-export default mongoose.model('menus', schema)
+export default mongoose.model('kitchens', schema)

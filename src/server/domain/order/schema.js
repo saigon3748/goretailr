@@ -13,8 +13,10 @@ let schema = mongoose.Schema({
     }, { _id: false })
   },
   code: { type: String, required: true, unique: true, uppercase: true },
+  ref: { type: String, required: true, uppercase: true },
   subtotal: { type: Number, required: true, default: 0 },
   discount: { type: Number, required: true, default: 0 },
+  discountAmt: { type: Number, required: true, default: 0 },
   tax: { type: Number, required: true, default: 0 },
   total: { type: Number, required: true, default: 0 },
   note: { type: String },
@@ -29,12 +31,13 @@ let schema = mongoose.Schema({
       isPercentDiscount: { type: Boolean, required: true, default: false },
       total: { type: Number, required: true, default: 0 },
       category: mongoose.Schema({
-        _id: { type: mongoose.Schema.Types.ObjectId, ref: 'catgeories' },
+        _id: { type: mongoose.Schema.Types.ObjectId, ref: 'categories' },
         name: { type: String, required: true }
       }, { _id: false }),
       note: { type: String }
     }, { _id: false })
-  ]  
+  ],
+  isDeleted: { type: Boolean, default: false }  
 })
 
 schema.index({"code": "text", "note": "text", "items.name": "text", "items.note": "text", "items.category.name": "text"})

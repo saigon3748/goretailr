@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import moment from 'moment';
 import promiseRetry from 'promise-retry';
 import schema from './schema';
 import BaseService from '../base-service';
@@ -9,6 +10,19 @@ export default class Service extends BaseService {
     super(schema, ctx);
   }
 
+  getToday() {
+    let query = {
+      createdAt: {
+        $lte: new Date()
+      },
+      isDeleted: {
+        $ne: true
+      }
+    };
+
+    return this.find(query);
+  }
+
   create(data) {
     if (!data) throw new Error('Missing data');
     if (!data.items) throw new Error('Missing items');
@@ -17,6 +31,7 @@ export default class Service extends BaseService {
     let doCreate = () => {
       let doGenerateCode = () => {
         data.code = this._generateCode(this._ctx.user.tenant.code);
+        data.ref = data.code.slice(-4);
       }
 
       let doCalculate = () => {
@@ -54,12 +69,12 @@ export default class Service extends BaseService {
     return promiseRetry(doCreate, {retries: 3})
   }  
 
+  deleteById(id) {
+    return this.updateById(id, { isDeleted: true });
+  }
+
   _generateCode(code) {
     let timestamp = new Date().getTime().toString().slice(-4);
-    let year = new Date().getFullYear().toString().slice(-2);
-    let month = new Date().getMonth() + 1;
-    let day = new Date().getDate();
-
-    return `${code}-${day}${month}${year}-${timestamp}`
+    return `${code}${moment().format("YYMMDD")}${timestamp}`
   }
 }

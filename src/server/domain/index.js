@@ -4,6 +4,7 @@ import User from './user';
 import Menu from './menu';
 import Category from './category';
 import Order from './order';
+import Kitchen from './kitchen';
 
 export default class Domain {
   static Tenant(data) {
@@ -44,6 +45,14 @@ export default class Domain {
 
   static OrderService(ctx) {
     return new Order.Service(ctx);
+  }
+
+  static Kitchen(data) {
+    return new Kitchen.Model(data);
+  }
+
+  static KitchenService(ctx) {
+    return new Kitchen.Service(ctx);
   }
 }
 

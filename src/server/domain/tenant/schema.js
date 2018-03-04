@@ -13,7 +13,28 @@ let schema = mongoose.Schema({
       code: { type: String, required: true },
       name: { type: String, required: true }
     }, { _id: false })
-  ]
+  ],
+  settings: {
+    type: mongoose.Schema({
+      utc: { type: Number },
+      receiptPrinter: { type: String },
+      kitchenPrinter: { type: String },
+      confirmAndPrint: { type: Boolean },
+      receiptTemplate: {
+        type: mongoose.Schema({
+          receiptName: { type: String },
+          header1: { type: String },
+          header2: { type: String },
+          header3: { type: String },
+          header4: { type: String },
+          header5: { type: String },
+          footer1: { type: String },
+          footer2: { type: String },
+          footer3: { type: String }
+        }, { _id: false })        
+      }
+    }, { _id: false })
+  }
 })
 
 schema.index({"code": "text", "name": "text"})

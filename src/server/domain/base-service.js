@@ -3,9 +3,10 @@ import Boom from 'boom';
 import mongoose from 'mongoose';
 
 export default class BaseService {
-  constructor(repo, ctx) {
+  constructor(repo, ctx, isTenantFiltered = true) {
     this._repo = repo;
     this._ctx = ctx;
+    this._isTenantFiltered = isTenantFiltered;
   }
 
   findById(id, options) {
@@ -56,7 +57,6 @@ export default class BaseService {
 
   create(data) {
     if (!data) throw new Error('Missing data');
-console.log('data', data)
     data = this._appendTenant(data);
 
     _.extend(data, {
@@ -139,6 +139,8 @@ console.log('data', data)
   }
 
   _filterTenant(query) {
+    if (!this._isTenantFiltered) return query;
+
     if (this._ctx.user.tenant) {
       if (query.$and) {
         query.$and.push({
@@ -155,6 +157,8 @@ console.log('data', data)
   }
 
   _appendTenant(data) {
+    if (!this._isTenantFiltered) return data;
+
     //TODO
     if (!data.tenant && this._ctx.user.tenant) {
       data.tenant = _.clone(this._ctx.user.tenant);

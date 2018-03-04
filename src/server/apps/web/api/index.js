@@ -6,6 +6,7 @@ import UserApi from './user';
 import MenuApi from './menu';
 import CategoryApi from './category';
 import OrderApi from './order';
+import KitchenApi from './kitchen';
 
 export default express.Router()
   .use('/auth', AuthApi)  
@@ -14,4 +15,5 @@ export default express.Router()
   .use('/menus', MenuApi)
   .use('/categories', CategoryApi)
   .use('/orders', OrderApi)
+  .use('/kitchens', KitchenApi)
 

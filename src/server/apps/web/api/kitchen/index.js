@@ -11,15 +11,11 @@ export default express.Router()
     middleware.authenticate, 
     middleware.intercept(controller, 'getToday'))
 
-  .post('/', 
-    middleware.authenticate, 
-    middleware.intercept(controller, 'create'))
-
-  .get('/:id', 
-    middleware.authenticate, 
-    middleware.intercept(controller, 'findById'))
-
   .put('/:id', 
+    middleware.authenticate, 
+    middleware.intercept(controller, 'updateById'))
+
+  .post('/updateById/:id', 
     middleware.authenticate, 
     middleware.intercept(controller, 'updateById'))
 

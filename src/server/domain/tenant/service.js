@@ -7,7 +7,7 @@ import pipeline from '../../libs/pipeline';
 
 export default class Service extends BaseService {
   constructor(ctx) {
-    super(schema, ctx);
+    super(schema, ctx, false);
   }
 
   create(data) {
