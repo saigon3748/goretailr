@@ -15,14 +15,14 @@ export default express.Router()
     middleware.authenticate, 
     middleware.intercept(controller, 'updateById'))
 
-  .post('/updateById/:id', 
+  .post('/markCompleted', 
     middleware.authenticate, 
-    middleware.intercept(controller, 'updateById'))
+    middleware.intercept(controller, 'markCompleted'))
+
+  .post('/markUncompleted', 
+    middleware.authenticate, 
+    middleware.intercept(controller, 'markUncompleted'))
 
   .delete('/:id', 
-    middleware.authenticate, 
-    middleware.intercept(controller, 'deleteById'))
-
-  .post('/deleteById/:id', 
     middleware.authenticate, 
     middleware.intercept(controller, 'deleteById'))

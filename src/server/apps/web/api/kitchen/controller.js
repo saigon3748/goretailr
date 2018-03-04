@@ -12,4 +12,12 @@ export default class Controller extends BaseController {
   getToday() {
     return this._service.getToday();
   }
+
+  markCompleted() {
+    return this._service.markCompleted(this._ctx.req.body);    
+  }
+
+  markUncompleted() {
+    return this._service.markUncompleted(this._ctx.req.body);    
+  }
 }

@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import moment from 'moment';
+import Promise from 'bluebird';
 import promiseRetry from 'promise-retry';
 import schema from './schema';
 import BaseService from '../base-service';
@@ -14,9 +15,32 @@ export default class Service extends BaseService {
     let query = {
       createdAt: {
         $lte: new Date()
-      }
+      },
+      isCompleted: {
+        $ne: true
+      }      
     };
 
     return this.find(query);
+  }
+
+  markCompleted(ids) {
+    let doMarkItemCompleted = (id) => {
+      return this.updateById(id, {
+        isCompleted: true
+      })
+    }
+
+    return Promise.each(ids, doMarkItemCompleted);
+  }
+
+  markUncompleted(ids) {
+    let doMarkItemUncompleted = (id) => {
+      return this.updateById(id, {
+        isCompleted: false
+      })
+    }
+
+    return Promise.each(ids, doMarkItemUncompleted);
   }
 }
