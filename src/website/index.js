@@ -6,7 +6,7 @@ import dashboard from './components/dashboard';
 import tenantList from './components/tenant-list';
 import tenantDetail from './components/tenant-detail';
 import cart from './components/cart';
-import today from './components/today';
+import orderList from './components/order-list';
 import orderDetail from './components/order-detail';
 import menuList from './components/menu-list';
 import categoryList from './components/category-list';
@@ -31,7 +31,7 @@ angular
   .component('goTenantList', tenantList)
   .component('goTenantDetail', tenantDetail)
   .component('goCart', cart)
-  .component('goToday', today)
+  .component('goOrderList', orderList)
   .component('goOrderDetail', orderDetail)
   .component('goMenuList', menuList)
   .component('goCategoryList', categoryList)

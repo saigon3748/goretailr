@@ -101,10 +101,6 @@ export default class Service extends BaseService {
     return promiseRetry(doCreate, {retries: 3})
   }  
 
-  deleteById(id) {
-    return this.updateById(id, { isDeleted: true });
-  }
-
   _generateCode(code) {
     let timestamp = new Date().getTime().toString().slice(-4);
     return `${code}${moment().format("YYMMDD")}${timestamp}`

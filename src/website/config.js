@@ -6,7 +6,7 @@ export default {
     TENANT_LIST: 'TenantList',
     TENANT_DETAIL: 'TenantDetail',
     CART: 'Cart',
-    TODAY: 'Today',
+    ORDER_LIST: 'OrderList',
     ORDER_DETAIL: 'OrderDetail',
     MENU_LIST: 'MenuList',
     CATEGORY_LIST: 'CategoryList'

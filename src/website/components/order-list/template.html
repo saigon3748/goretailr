@@ -1,6 +1,6 @@
 <ol class="breadcrumb">
   <li><a href="#">Dashboard</a></li>
-  <li class="active">Today</li>
+  <li class="active">Orders</li>
 </ol>
 <div class="row">
   <div class="col-sm-8">
@@ -20,7 +20,8 @@
 <table class="table"> 
   <thead> 
     <tr> 
-      <th>Order</th> 
+      <th>Order ID</th> 
+      <th>Order Ref.</th> 
       <th>Discount</th> 
       <th>Total</th> 
       <th>Created By</th> 
@@ -31,6 +32,7 @@
   <tbody> 
     <tr ng-repeat="order in $ctrl.orders"> 
       <td>{{order.code}}</td> 
+      <td>#{{order.ref}}</td> 
       <td>{{order.discount | currency}}</td>
       <td>{{order.total | currency}}</td>
       <td>{{order.createdBy.name}}</td> 
@@ -38,6 +40,9 @@
       <td>
         <a href="javascript:;" ng-click="$ctrl.view(order)" class="btn btn-default btn-xs" role="button">
           View
+        </a>
+        <a href="javascript:;" ng-click="$ctrl.delete(order)" class="btn btn-danger btn-xs" role="button">
+          <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
         </a>        
       </td>
     </tr>
@@ -45,7 +50,7 @@
 </table>
 <div class="clearfix">
   <div class="pull-left pagination-info">
-    <p>Found {{$ctrl.pagination.total}} items</p>
+    <p>{{$ctrl.pagination.total}} records</p>
   </div>
   <div class="pull-right">
     <uib-pagination total-items="$ctrl.pagination.total" ng-model="$ctrl.pagination.page" ng-change="$ctrl.search()"

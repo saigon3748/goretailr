@@ -20,9 +20,9 @@ export default ['$stateProvider', '$locationProvider', 'appConfig', function ($s
       url: '/cart',
       template: '<go-cart/>'
     })
-    .state(appConfig.states.TODAY, {
-      url: '/today',
-      template: '<go-today/>'
+    .state(appConfig.states.ORDER_LIST, {
+      url: '/orders',
+      template: '<go-order-list/>'
     })
     .state(appConfig.states.ORDER_DETAIL, {
       url: '/orders/:id',

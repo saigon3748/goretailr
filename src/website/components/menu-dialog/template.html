@@ -34,7 +34,14 @@
       <div class="col-sm-9">
         <select class="form-control" ng-model="$ctrl.menu.category" ng-options="category as category.name for category in $ctrl.categories track by category._id">
           <option value="">- Select category -</option>
-        </select>        
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-3">Image</label>
+      <div class="col-sm-9">
+        <img ng-src="{{$ctrl.menu.image}}" style="height: 200px; width: 200px; display: block;"/>
+        <input type="file" ng-file-select="onFileSelect($files)" ng-model="$ctrl.menu.image">
       </div>
     </div>
     <div class="form-group">
@@ -42,14 +49,7 @@
       <div class="col-sm-9">
         <div class="checkbox">
           <label><input type="checkbox" ng-model="$ctrl.menu.isLocked"/>Locked</label>
-        </div>        
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-3">Image</label>
-      <div class="col-sm-9">
-        <img ng-src="{{$ctrl.menu.image}}" />
-        <input type="file" ng-file-select="onFileSelect($files)" ng-model="$ctrl.menu.image">
+        </div>
       </div>
     </div>
   </form>

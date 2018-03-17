@@ -48,6 +48,23 @@ export default [
         })      
     }
 
+    delete(order) {
+      this.DialogService.confirm("Do you want to delete?")
+        .then(confirmed => {
+          if (!confirmed) return;
+          this.OrderApi.delete(order._id)
+            .then(result => {
+              this.orders = _.filter(this.orders, item => {
+                return item._id != order._id;
+              })                       
+              toastr.success('Deleted successfully');
+            })
+            .catch(err => {
+              toastr.error('Deleted failed');
+            })          
+        })
+    }
+
     getTags(order) {
       if (!order.tags) return null;
       return order.tags.reduce((value, item) => `${value}, ${item}`);

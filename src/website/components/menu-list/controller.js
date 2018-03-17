@@ -60,6 +60,23 @@ export default [
         })      
     }
 
+    delete(menu) {
+      this.DialogService.confirm("Do you want to delete?")
+        .then(confirmed => {
+          if (!confirmed) return;
+          this.MenuApi.delete(menu._id)
+            .then(result => {
+              this.menus = _.filter(this.menus, item => {
+                return item._id != menu._id;
+              })                       
+              toastr.success('Deleted successfully');
+            })
+            .catch(err => {
+              toastr.error('Deleted failed');
+            })          
+        })
+    }
+
     getDiscount(menu) {
       if (!menu.discount) return null;
       if (menu.isPercentDiscount) return `${menu.discount}%`;
