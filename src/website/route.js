@@ -13,7 +13,7 @@ export default ['$stateProvider', '$locationProvider', 'appConfig', function ($s
       template: '<go-tenant-list/>'
     })
     .state(appConfig.states.TENANT_DETAIL, {
-      url: '/company',
+      url: '/shop',
       template: '<go-tenant-detail/>'
     })
     .state(appConfig.states.CART, {

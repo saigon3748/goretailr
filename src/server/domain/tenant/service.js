@@ -12,6 +12,7 @@ export default class Service extends BaseService {
 
   create(data) {
     if (!data) throw new Error('Missing data');
+    let tenant;
 
     let doCheckDuplicateTenant = () => {
       return this.findOne({code: data.tenant.code.toUpperCase()})
@@ -28,21 +29,29 @@ export default class Service extends BaseService {
     }
 
     let doCreateTenant = () => {
-      return super.create(data.tenant);
+      return super.create(data.tenant)
+        .then(result => {
+          tenant = result;
+        })
     }
 
-    let doCreateAdmin = (tenant) => {
-      if (!tenant) throw Boom.badImplementation('Missing teant');
+    let doCreateAdmin = () => {
+      if (!tenant) throw Boom.badImplementation('Missing tenant');
       data.user.isAdmin = true;
       data.user.tenant = _.pick(tenant, ['_id', 'name', 'code']);
       return new User.Service(this._ctx).create(data.user);
+    }
+
+    let doReturn = () => {
+      return tenant;
     }
 
     return pipeline([
       doCheckDuplicateTenant,
       doCheckDuplicateAdmin,
       doCreateTenant,
-      doCreateAdmin
+      doCreateAdmin,
+      doReturn
     ])
   }
 }

@@ -16,16 +16,11 @@ export default [
     }
 
     $onInit() {
-      this.pagination = {
-        page: 1,
-        limit: 10
-      };
-
       this.search();
     }
 
     search() {
-      this.CategoryApi.findTop()
+      this.CategoryApi.find()
         .then(result => {
           this.categories = result;
         })
@@ -39,7 +34,7 @@ export default [
       this.DialogService.open(CategoryDialog, inputs)
         .then(category => {
           if (!category) return;
-          this.categories.push(category);
+          this.search();
         })      
     }
 
@@ -51,10 +46,7 @@ export default [
       this.DialogService.open(CategoryDialog, inputs)
         .then(category => {
           if (!category) return;
-          let item = _.find(this.categories, item => {
-            return item._id === category._id;
-          })
-          if (item) _.extend(item, category);
+          this.search();
         })      
     }
 
@@ -64,6 +56,7 @@ export default [
           if (!confirmed) return;
           this.CategoryApi.delete(category._id)
             .then(result => {
+              this.search();              
               toastr.success('Deleted successfully');
             })
             .catch(err => {
@@ -72,14 +65,11 @@ export default [
         })
     }
 
-    getTags(category) {
-      if (!category.tags) return null;
-      return category.tags.reduce((value, item) => `${value}, ${item}`);
-    }
-
-    getStatus(category) {
-      if (category.isLocked) return "Locked";
-      return null;
+    getParent(category) {
+      let parent = _.find(this.categories, item => {
+        return item._id === category.parent;
+      })
+      return parent ? parent.name : "";
     }
   }
 ]

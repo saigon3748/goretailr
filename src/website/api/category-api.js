@@ -5,18 +5,5 @@ export default ['$http', '$q',
     constructor($http, $q) {
       super($http, $q, 'categories');
     }
-
-    findTop() {
-      let url = `${this.endpoint}/top`;
-      return this.$q((resolve, reject) => {
-        this.$http.get(url)
-          .success(result => {
-            resolve(result);
-          })
-          .error(err => {
-            reject(err);
-          });
-      });    
-    }
   }
 ]

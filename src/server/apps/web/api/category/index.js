@@ -7,10 +7,6 @@ export default express.Router()
     middleware.authenticate, 
     middleware.intercept(controller, 'find'))
 
-  .get('/top', 
-    middleware.authenticate, 
-    middleware.intercept(controller, 'findTop'))
-
   .post('/', 
     middleware.authenticate, 
     middleware.intercept(controller, 'create'))

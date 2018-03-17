@@ -34,9 +34,12 @@ let schema = mongoose.Schema({
         _id: { type: mongoose.Schema.Types.ObjectId, ref: 'categories' },
         name: { type: String, required: true }
       }, { _id: false }),
-      note: { type: String }
+      note: { type: String },
+      isTakeaway: { type: Boolean, default: false }
     }, { _id: false })
   ],
+  table: { type: String },
+  isTakeaway: { type: Boolean, default: false },  
   isDeleted: { type: Boolean, default: false }  
 })
 

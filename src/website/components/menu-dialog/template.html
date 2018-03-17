@@ -45,6 +45,13 @@
         </div>        
       </div>
     </div>
+    <div class="form-group">
+      <label class="control-label col-sm-3">Image</label>
+      <div class="col-sm-9">
+        <img ng-src="{{$ctrl.menu.image}}" />
+        <input type="file" ng-file-select="onFileSelect($files)" ng-model="$ctrl.menu.image">
+      </div>
+    </div>
   </form>
 </div>
 <div class="modal-footer">

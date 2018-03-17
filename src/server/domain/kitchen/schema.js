@@ -23,6 +23,7 @@ let schema = mongoose.Schema({
     name: { type: String, required: true }
   }, { _id: false }),
   note: { type: String },
+  isTakeaway: { type: Boolean, default: false }, 
   isCompleted: { type: Boolean, required: true, default: false }
 })
 

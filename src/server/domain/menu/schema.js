@@ -16,6 +16,7 @@ let schema = mongoose.Schema({
   unitPrice: { type: Number, required: true },
   discount: { type: Number, default: 0 },
   isPercentDiscount: { type: Boolean, default: false },
+  isPriceEditable: { type: Boolean, default: false },
   category: mongoose.Schema({
     _id: { type: mongoose.Schema.Types.ObjectId, ref: 'categories' },
     name: { type: String, required: true }

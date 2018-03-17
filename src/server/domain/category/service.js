@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import Promise from 'bluebird';
 import pipeline from '../../libs/pipeline';
 import schema from './schema';
 import BaseService from '../base-service';
@@ -7,10 +8,6 @@ export default class Service extends BaseService {
   constructor(ctx) {
     super(schema, ctx);
   }
-
-  findTop() {
-    return this.find({parent: { $exists: false }});
-  } 
 
   create(data) {
     if (!data) throw new Error('Missing data');
@@ -30,8 +27,7 @@ export default class Service extends BaseService {
         return super.create({
           parent: category._id,
           name: sub.name,
-          displayIndex: sub.displayIndex || 1,
-          path: [...category.path, category._id ]
+          displayIndex: sub.displayIndex || 1
         }).then(result => {
           sub._id = result._id;
         })        
@@ -46,10 +42,15 @@ export default class Service extends BaseService {
       })
     }
 
+    let doReturn = () => {
+      return category;
+    }
+
     return pipeline([
       doCreate,
       doCreateSubs,
-      doUpdate
+      doUpdate,
+      doReturn
     ]);
   }
 
@@ -85,8 +86,7 @@ export default class Service extends BaseService {
         return super.create({
           parent: category._id,
           name: sub.name,
-          displayIndex: sub.displayIndex || 1,
-          path: [...category.path, category._id ]
+          displayIndex: sub.displayIndex || 1
         }).then(result => {
           sub._id = result._id;
         })
@@ -142,25 +142,14 @@ export default class Service extends BaseService {
       })
     }
 
-    let doGetSubs = () => {
-      return super.find({
-        path: {
-          $elemMatch: {
-            $eq: category._id
-          }
-        }
-      })
-      .then(result => {
-        subs = result;
-      })
-    }
-
     let doDeleteSubs = () => {
+      if (!category.subs) return;
+
       let doDeleteSub = (sub) => {
         return super.deleteById(sub._id);     
       }
 
-      return Promise.all(_.map(subs, sub => doDeleteSub(sub)))
+      return Promise.each(category.subs, doDeleteSub)
     }
 
     let doDelete = () => {
@@ -169,7 +158,6 @@ export default class Service extends BaseService {
 
     return pipeline([
       doGetCategory,
-      doGetSubs,
       doDeleteSubs,
       doDelete
     ]);

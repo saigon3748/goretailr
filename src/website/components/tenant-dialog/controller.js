@@ -97,7 +97,7 @@ export default [
       if (user.isManager) return "Manager" 
       return "Staff"      
     }
-    
+
     lockUser(user) {
       let data = _.clone(user);
       data.isLocked = true;

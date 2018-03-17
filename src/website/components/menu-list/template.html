@@ -43,7 +43,7 @@
 </table>
 <div class="clearfix">
   <div class="pull-left pagination-info">
-    <p>Found {{$ctrl.pagination.total}} items</p>
+    <p>{{$ctrl.pagination.total}} records</p>
   </div>
   <div class="pull-right">
     <uib-pagination total-items="$ctrl.pagination.total" ng-model="$ctrl.pagination.page" ng-change="$ctrl.search()"
