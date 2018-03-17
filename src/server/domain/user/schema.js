@@ -15,9 +15,9 @@ let schema = mongoose.Schema({
   username: { type: String, required: true, unique: true, lowercase: true },
   password: { type: String, required: true },
   name: { type: String, required: true },
-  isAdmin: { type: Boolean, required: true, default: false },
-  isManager: { type: Boolean, required: true, default: false },
-  isLocked: { type: Boolean, required: true, default: false },
+  isAdmin: { type: Boolean, default: false },
+  isManager: { type: Boolean, default: false },
+  isLocked: { type: Boolean, default: false },
   lastLogin: { type: Date, default: Date.now }
 })
 

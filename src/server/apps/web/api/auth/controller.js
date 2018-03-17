@@ -33,7 +33,7 @@ export default class Controller extends BaseController {
       }
 
       if (!bscrypt.compareSync(credentials.pass, data.user.password)) {
-        return { error: 'Incorrect username or password.' };
+        return { error: 'Incorrect login ID or password.' };
       }
 
       return { token: this._generateToken(data.user) };

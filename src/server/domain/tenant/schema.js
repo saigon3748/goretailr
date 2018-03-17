@@ -7,6 +7,7 @@ import paginate from 'mongoose-paginate';
 let schema = mongoose.Schema({
   code: { type: String, required: true, unique: true, uppercase: true },
   name: { type: String, required: true },
+  isLocked: { type: Boolean, default: false },  
   subs: [
     mongoose.Schema({
       _id: { type: mongoose.Schema.Types.ObjectId, ref: 'tenants' },

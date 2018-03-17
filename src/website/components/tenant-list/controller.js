@@ -35,7 +35,7 @@ export default [
 
     create() {
       let inputs = {
-        user: null
+        tenant: null
       };
 
       this.DialogService.open(TenantDialog, inputs)
@@ -45,7 +45,7 @@ export default [
         })
     }
 
-    edit(user) {
+    edit(tenant) {
       let inputs = {
         tenant: _.clone(tenant)
       };
@@ -58,6 +58,11 @@ export default [
           })
           if (item) _.extend(item, tenant);
         })
+    }
+
+    getTenantStatus(tenant) {
+      if (tenant.isLocked) return "Locked"
+      return "" 
     }
   }
 ]
