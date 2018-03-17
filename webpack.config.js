@@ -16,6 +16,7 @@ module.exports = function(env) {
         './src/website/index.js'
       ],
       vendor: [
+        './src/website/libs/jquery-2.1.4.min.js',
         './src/website/vendor/bootstrap/dist/js/bootstrap.min.js',
         './src/website/vendor/lodash/dist/lodash.min.js',
         './src/website/vendor/moment/min/moment.min.js',
@@ -26,6 +27,8 @@ module.exports = function(env) {
         './src/website/vendor/angular-jwt/dist/angular-jwt.min.js',
         './src/website/libs/socket.io.js',
         './src/website/libs/toastr/toastr.min.js',
+        './src/website/libs/daterangepicker/daterangepicker.min.js',
+        './src/website/libs/daterangepicker/angular-daterangepicker.min.js',
 
         './src/website/style.scss',
       ]
