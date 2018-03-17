@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "amqplib": "0.4.2",
+    "aws-sdk": "2.211.0",
     "basic-auth": "1.0.3",
     "bcryptjs": "2.3.0",
     "bluebird": "3.3.5",

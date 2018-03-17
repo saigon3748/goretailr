@@ -11,6 +11,8 @@ export default [
       this.MenuApi = MenuApi;
       this.CategoryApi = CategoryApi;
       this.menu = menu || {};
+      this.menu.extra = this.menu.extra || [];
+
       this.categories = [];
 
       this.init();
@@ -25,6 +27,17 @@ export default [
 
     cancel() {
       this.$uibModalInstance.close(false);
+    }
+
+    addExtra() {
+      this.menu.extra = this.menu.extra || [];
+      this.menu.extra.push({
+        _t: (new Date()).getTime()
+      })
+    }
+
+    deleteExtra(extra) {
+      extra.isDeleted = true;
     }
 
     save() {

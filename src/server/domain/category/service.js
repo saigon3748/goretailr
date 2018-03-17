@@ -146,7 +146,7 @@ export default class Service extends BaseService {
       if (!category.subs) return;
 
       let doDeleteSub = (sub) => {
-        return super.deleteById(sub._id);     
+        return this.deleteById(sub._id);     
       }
 
       return Promise.each(category.subs, doDeleteSub)

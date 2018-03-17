@@ -30,6 +30,12 @@ let schema = mongoose.Schema({
       discount: { type: Number, required: true, default: 0 },
       isPercentDiscount: { type: Boolean, required: true, default: false },
       total: { type: Number, required: true, default: 0 },
+      extra: [ 
+        mongoose.Schema({
+          name: { type: String, required: true },
+          amount: { type: Number, default: 0 }
+        }, { _id: false })
+      ],      
       category: mongoose.Schema({
         _id: { type: mongoose.Schema.Types.ObjectId, ref: 'categories' },
         name: { type: String, required: true }

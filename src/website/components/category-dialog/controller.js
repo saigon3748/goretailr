@@ -27,12 +27,6 @@ export default [
       sub.isDeleted = true;
     }
 
-    get subs() {
-      return _.filter(this.category.subs, item => {
-        return !item.isDeleted;
-      })
-    }
-
     save() {
       if (!this.validate()) return;
 

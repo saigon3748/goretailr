@@ -30,7 +30,7 @@
             </tr> 
           </thead> 
           <tbody> 
-            <tr ng-repeat="sub in $ctrl.subs"> 
+            <tr ng-if="!sub.isDeleted" ng-repeat="sub in $ctrl.category.subs"> 
               <td>
                 <input class="form-control" ng-model="sub.name" />
               </td> 
