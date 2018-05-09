@@ -13,9 +13,13 @@ export default class Service extends BaseService {
   }
 
   getToday() {
+    let fromDate = moment().utcOffset(4).startOf('day').toDate()
+    let toDate = moment().utcOffset(4).endOf('day').toDate()
+
     let query = {
       createdAt: {
-        $lte: new Date()
+        $lte: toDate,
+        $gte: fromDate
       },
       isDeleted: {
         $ne: true
@@ -78,7 +82,8 @@ export default class Service extends BaseService {
               name: item.name,
               quantity: item.quantity,
               category: item.category,
-              note: item.note
+              note: item.note,
+              isTakeaway: item.isTakeaway
             })
         }
 
