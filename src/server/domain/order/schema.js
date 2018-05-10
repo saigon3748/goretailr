@@ -19,6 +19,8 @@ let schema = mongoose.Schema({
   discountAmt: { type: Number, required: true, default: 0 },
   tax: { type: Number, required: true, default: 0 },
   total: { type: Number, required: true, default: 0 },
+  cash: { type: Number },
+  change: { type: Number },
   note: { type: String },
   items: [
     mongoose.Schema({
