@@ -5,6 +5,8 @@ import Menu from './menu';
 import Category from './category';
 import Order from './order';
 import Kitchen from './kitchen';
+import Addon from './addon';
+import Cash from './cash';
 
 export default class Domain {
   static Tenant(data) {
@@ -53,6 +55,22 @@ export default class Domain {
 
   static KitchenService(ctx) {
     return new Kitchen.Service(ctx);
+  }
+
+  static Addon(data) {
+    return new Addon.Model(data);
+  }
+
+  static AddonService(ctx) {
+    return new Addon.Service(ctx);
+  }
+
+  static Cash(data) {
+    return new Cash.Model(data);
+  }
+
+  static CashService(ctx) {
+    return new Cash.Service(ctx);
   }
 }
 

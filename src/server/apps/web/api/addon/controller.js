@@ -6,6 +6,6 @@ import pipeline from '../../../../libs/pipeline';
 
 export default class Controller extends BaseController {
   constructor(ctx) {
-    super(ctx, Domain.CashService);
+    super(ctx, Domain.AddonService);
   }
 }

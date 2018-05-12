@@ -22,6 +22,18 @@ let schema = mongoose.Schema({
     _id: { type: mongoose.Schema.Types.ObjectId, ref: 'categories' },
     name: { type: String, required: true }
   }, { _id: false }),
+  extra: [ 
+    mongoose.Schema({
+      _id: { type: mongoose.Schema.Types.ObjectId, ref: 'addons' },
+      name: { type: String, required: true },
+      quantity: { type: Number, required: true, default: 0 },
+      unitPrice: { type: Number, required: true, default: 0 },
+      subtotal: { type: Number, required: true, default: 0 },
+      discount: { type: Number, default: 0 },
+      isPercentDiscount: { type: Boolean, default: false },
+      total: { type: Number, required: true, default: 0 }
+    }, { _id: false })
+  ],  
   note: { type: String },
   isTakeaway: { type: Boolean, default: false }, 
   isCompleted: { type: Boolean, required: true, default: false }

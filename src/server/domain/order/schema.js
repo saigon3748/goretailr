@@ -31,11 +31,18 @@ let schema = mongoose.Schema({
       subtotal: { type: Number, required: true, default: 0 },
       discount: { type: Number, required: true, default: 0 },
       isPercentDiscount: { type: Boolean, required: true, default: false },
+      extraTotal: { type: Number, required: true, default: 0 },
       total: { type: Number, required: true, default: 0 },
       extra: [ 
         mongoose.Schema({
+          _id: { type: mongoose.Schema.Types.ObjectId, ref: 'addons' },
           name: { type: String, required: true },
-          amount: { type: Number, default: 0 }
+          quantity: { type: Number, required: true, default: 0 },
+          unitPrice: { type: Number, required: true, default: 0 },
+          subtotal: { type: Number, required: true, default: 0 },
+          discount: { type: Number, default: 0 },
+          isPercentDiscount: { type: Boolean, default: false },
+          total: { type: Number, required: true, default: 0 }
         }, { _id: false })
       ],      
       category: mongoose.Schema({

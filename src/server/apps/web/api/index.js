@@ -7,6 +7,7 @@ import MenuApi from './menu';
 import CategoryApi from './category';
 import OrderApi from './order';
 import KitchenApi from './kitchen';
+import AddonApi from './addon';
 import CashApi from './cash';
 
 export default express.Router()
@@ -17,5 +18,6 @@ export default express.Router()
   .use('/categories', CategoryApi)
   .use('/orders', OrderApi)
   .use('/kitchens', KitchenApi)
+  .use('/addons', AddonApi)
   .use('/cashes', CashApi)
 

@@ -46,21 +46,30 @@ export default class Service extends BaseService {
         let subtotal = 0;
         let discount = 0;
         let total = 0;
+        let extraTotal = 0;
 
         data.items.forEach(item => {
           item.subtotal = item.quantity * item.unitPrice;
-          item.discount = 0;
-          item.total = item.subtotal - item.discount;
+          item.total = item.subtotal - (item.discount || 0);
+
+          if (item.extra && item.extra.length > 0) {
+            item.extra.forEach(extra => {
+              extra.subtotal = extra.quantity * extra.unitPrice;
+              extra.total = extra.subtotal - (extra.discount || 0);
+              extraTotal += extra.total;
+            });
+          }
 
           subtotal += item.subtotal;
           discount += item.discount;
           total += item.total;
         });
 
+        data.extraTotal = extraTotal;
         data.subtotal = subtotal;
         data.discount = discount;
         data.tax = 0.11 * total;
-        data.total = total + data.tax;
+        data.total = total + data.tax + data.extraTotal;
       }
 
       let doSave = () => {
@@ -82,6 +91,7 @@ export default class Service extends BaseService {
               name: item.name,
               quantity: item.quantity,
               category: item.category,
+              extra: item.extra,
               note: item.note,
               isTakeaway: item.isTakeaway
             })

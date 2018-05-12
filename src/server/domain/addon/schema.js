@@ -15,18 +15,12 @@ let schema = mongoose.Schema({
   name: { type: String, required: true },
   unitPrice: { type: Number, required: true },
   discount: { type: Number, default: 0 },
-  isPercentDiscount: { type: Boolean, default: false },
-  category: mongoose.Schema({
-    _id: { type: mongoose.Schema.Types.ObjectId, ref: 'categories' },
-    name: { type: String, required: true }
-  }, { _id: false }),
-  image: { type: String },
-  isLocked: { type: Boolean, default: false }  
+  isPercentDiscount: { type: Boolean, default: false }
 })
 
-schema.index({"name": "text", "category.name": "text"})
+schema.index({"name": "text"})
 
 schema.plugin(audit);
 schema.plugin(paginate);
 
-export default mongoose.model('menus', schema)
+export default mongoose.model('addons', schema)
