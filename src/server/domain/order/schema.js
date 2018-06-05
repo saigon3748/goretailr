@@ -31,7 +31,6 @@ let schema = mongoose.Schema({
       subtotal: { type: Number, required: true, default: 0 },
       discount: { type: Number, required: true, default: 0 },
       isPercentDiscount: { type: Boolean, required: true, default: false },
-      extraTotal: { type: Number, required: true, default: 0 },
       total: { type: Number, required: true, default: 0 },
       extra: [ 
         mongoose.Schema({
@@ -54,6 +53,7 @@ let schema = mongoose.Schema({
     }, { _id: false })
   ],
   table: { type: String },
+  isInclusiveGST: { type: Boolean, default: true },
   isTakeaway: { type: Boolean, default: false },  
   isDeleted: { type: Boolean, default: false }  
 })

@@ -4,6 +4,7 @@ import Promise from 'bluebird';
 import promiseRetry from 'promise-retry';
 import schema from './schema';
 import BaseService from '../base-service';
+import TenantService from '../tenant/service';
 import KitchenService from '../kitchen/service';
 import pipeline from '../../libs/pipeline';
 
@@ -36,7 +37,16 @@ export default class Service extends BaseService {
 
     let doCreate = () => {
       let order;
+      let tenant;
 
+      let doGetTenant = () => {
+        return new TenantService(this._ctx)
+          .findById(this._ctx.user.tenant._id)
+          .then(result => {
+            tenant = result
+          })
+      }
+      
       let doGenerateCode = () => {
         data.code = this._generateCode(this._ctx.user.tenant.code);
         data.ref = data.code.slice(-4);
@@ -49,13 +59,13 @@ export default class Service extends BaseService {
         let extraTotal = 0;
 
         data.items.forEach(item => {
-          item.subtotal = item.quantity * item.unitPrice;
-          item.total = item.subtotal - (item.discount || 0);
+          item.subtotal = _.round(item.quantity * item.unitPrice, 2);
+          item.total = _.round(item.subtotal - (item.discount || 0), 2);
 
           if (item.extra && item.extra.length > 0) {
             item.extra.forEach(extra => {
-              extra.subtotal = extra.quantity * extra.unitPrice;
-              extra.total = extra.subtotal - (extra.discount || 0);
+              extra.subtotal = _.round(extra.quantity * extra.unitPrice, 2);
+              extra.total = _.round(extra.subtotal - (extra.discount || 0), 2);
               extraTotal += extra.total;
             });
           }
@@ -65,11 +75,16 @@ export default class Service extends BaseService {
           total += item.total;
         });
 
-        data.extraTotal = extraTotal;
         data.subtotal = subtotal;
         data.discount = discount;
-        data.tax = 0.11 * total;
-        data.total = total + data.tax + data.extraTotal;
+        data.isInclusiveGST = tenant.settings.isInclusiveGST;
+        if (tenant.settings.isInclusiveGST) {
+          data.total = total + extraTotal;
+          data.tax = _.round(0.11 * total, 2);
+        } else {
+          data.tax = _.round(0.11 * total, 2);
+          data.total = total + extraTotal + data.tax;
+        }
       }
 
       let doSave = () => {
@@ -105,6 +120,7 @@ export default class Service extends BaseService {
       }
 
       return pipeline([
+        doGetTenant,
         doGenerateCode,
         doCalculate,
         doSave,

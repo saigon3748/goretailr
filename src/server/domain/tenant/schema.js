@@ -21,6 +21,7 @@ let schema = mongoose.Schema({
       receiptPrinter: { type: String },
       kitchenPrinter: { type: String },
       confirmAndPrint: { type: Boolean },
+      isInclusiveGST: { type: Boolean, default: true },
       receiptTemplate: {
         type: mongoose.Schema({
           receiptName: { type: String },
