@@ -53,10 +53,8 @@ export default class Service extends BaseService {
       }
 
       let doCalculate = () => {
-        let subtotal = 0;
-        let discount = 0;
-        let total = 0;
-        let extraTotal = 0;
+        data.subtotal = 0;
+        data.discount = 0;
 
         data.items.forEach(item => {
           item.subtotal = _.round(item.quantity * item.unitPrice, 2);
@@ -66,28 +64,27 @@ export default class Service extends BaseService {
             item.extra.forEach(extra => {
               extra.subtotal = _.round(extra.quantity * extra.unitPrice, 2);
               extra.total = _.round(extra.subtotal - (extra.discount || 0), 2);
-              extraTotal += extra.total;
+              data.subtotal += extra.subtotal;
+              data.discount += extra.discount || 0;
             });
           }
 
-          subtotal += item.subtotal;
-          discount += item.discount;
-          total += item.total;
+          data.subtotal += item.subtotal;
+          data.discount += item.discount;
         });
 
-        data.subtotal = subtotal;
-        data.discount = discount;
         data.isInclusiveGST = tenant.settings.isInclusiveGST;
-        if (tenant.settings.isInclusiveGST) {
-          data.total = total + extraTotal;
-          data.tax = _.round(0.11 * total, 2);
+        if (data.isInclusiveGST) {
+          data.total = _.round(data.subtotal - data.discountAmt || data.discount, 2);
+          data.tax = _.round(data.total * 0.11, 2);
         } else {
-          data.tax = _.round(0.11 * total, 2);
-          data.total = total + extraTotal + data.tax;
+          data.tax = _.round((data.subtotal - data.discountAmt || data.discount) * 0.11, 2);
+          data.total = _.round(data.subtotal - (data.discountAmt || data.discount) + data.tax, 2);
         }
       }
 
       let doSave = () => {
+        console.log(JSON.stringify(data))
         return super.create(data)
           .then(result => {
             order = result;
